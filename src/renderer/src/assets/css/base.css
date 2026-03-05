@@ -16,7 +16,9 @@ body {
   color: #6a5555;
   background: var(--color-background);
   line-height: 1.6;
-  font-family: 'Lexend', sans-serif;
+  font-family:
+    'Lexend',
+    sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,11 +1,15 @@
-import { Tasks } from './features/productvity/tasks/components/Tasks'
+import { BrowserRouter } from 'react-router-dom'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './shared/lib/queryClient'
+import { AppRoutes } from './app/AppRoutes'
 
 const App = (): React.JSX.Element => {
   return (
-    <div className="app">
-      <h1>Welcome to ProgressPal</h1>
-      <Tasks />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 
