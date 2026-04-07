@@ -1,5 +1,6 @@
 import { TaskList } from '../components/TaskList'
 import { useTasks } from '../hooks/useTasks'
+// import { Button } from '@renderer/components/ui/button'
 
 export const TasksPage = (): React.JSX.Element => {
   const { tasks, toggleTask } = useTasks()
@@ -13,7 +14,9 @@ export const TasksPage = (): React.JSX.Element => {
       <div className="rounded border border-border p-4">
         <TaskList tasks={tasks} onToggle={toggleTask} />
       </div>
-      <div className="rounded border border-border p-4 text-subheading">TODO: Add task form</div>
+      <div className="rounded border border-border p-4 text-subheading">
+        {/* <Button variant="default">Add Task</Button> */}
+      </div>
     </section>
   )
 }

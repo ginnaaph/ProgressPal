@@ -1,14 +1,17 @@
 export type Task = {
-  id: string
+  id: number
   title: string
-  completed: boolean
-  kind: 'todo' | 'habit'
+  status: 'not-started' | 'in-progress' | 'completed'
+  dueAt?: Date
+  taskType: 'todo' | 'habit'
+  priority?: 'low' | 'medium' | 'high'
+  completedAt?: Date
 }
 
 export type Routine = {
   id: string
   name: string
-  taskIds: string[]
+  taskIds: number[]
 }
 
 export type RewardTransaction = {

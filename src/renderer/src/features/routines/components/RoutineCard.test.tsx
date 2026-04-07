@@ -2,9 +2,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from '@renderer/shared/test/renderWithProviders'
+import type { Routine } from '@renderer/shared/types'
 import { RoutineCard } from './RoutineCard'
 
-const routine = { id: 'r1', name: 'Morning reset', taskIds: ['t1'] } as const
+const routine: Routine = { id: 'r1', name: 'Morning reset', taskIds: [1] }
 
 describe('RoutineCard', () => {
   it('renders and selects', async () => {

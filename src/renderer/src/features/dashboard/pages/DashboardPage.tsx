@@ -1,8 +1,11 @@
+import { getGreeting } from '../../../utils/getGreeting'
+
 export const DashboardPage = (): React.JSX.Element => {
+  const greeting = getGreeting()
   return (
-    <section className="space-y-4">
-      <header>
-        <h1 className="text-heading">Dashboard</h1>
+    <section className="space-y-4 bg-white">
+      <header className="p-3">
+        <h1 className="text-heading">{greeting}, Gina!</h1>
         <p className="text-subheading">Quick overview of your day.</p>
       </header>
       <div className="grid gap-4 md:grid-cols-2">

@@ -1,6 +1,5 @@
-// TODO: Configure Supabase client with env vars and auth when ready.
-// TODO: Add Supabase auth + user_id ownership and foreign keys.
-export const supabaseClient = {
-  url: 'https://placeholder.supabase.co',
-  anonKey: 'public-anon-key'
-}
+import { createClient } from '@supabase/supabase-js'
+ 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+export const supabase = createClient(supabaseUrl, supabaseKey)

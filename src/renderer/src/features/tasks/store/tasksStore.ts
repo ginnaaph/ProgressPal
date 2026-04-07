@@ -4,7 +4,7 @@ import type { Task } from '@renderer/shared/types'
 export type TasksState = {
   tasks: Task[]
   setTasks: (tasks: Task[]) => void
-  toggleTask: (id: string) => void
+  toggleTask: (id: number) => void
   addTask: (draft: Omit<Task, 'id'>) => void
 }
 
@@ -14,7 +14,13 @@ export const useTasksStore = create<TasksState>((set) => ({
   toggleTask: (id) => {
     set((state) => ({
       tasks: state.tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.id === id
+          ? {
+              ...task,
+              status: task.status === 'completed' ? 'not-started' : 'completed',
+              completedAt: task.status === 'completed' ? undefined : new Date()
+            }
+          : task
       )
     }))
 
@@ -22,7 +28,7 @@ export const useTasksStore = create<TasksState>((set) => ({
   },
   addTask: (draft) => {
     set((state) => ({
-      tasks: [...state.tasks, { ...draft, id: crypto.randomUUID() }]
+      tasks: [...state.tasks, { ...draft, id: state.tasks.length + 1 }]
     }))
   }
 }))

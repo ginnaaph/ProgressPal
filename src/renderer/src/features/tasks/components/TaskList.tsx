@@ -3,7 +3,7 @@ import { TaskItem } from './TaskItem'
 
 export type TaskListProps = {
   tasks: Task[]
-  onToggle: (id: string) => void
+  onToggle: (id: number) => void
 }
 
 export const TaskList = ({ tasks, onToggle }: TaskListProps): React.JSX.Element => {

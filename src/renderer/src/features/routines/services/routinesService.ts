@@ -3,7 +3,7 @@ import type { Routine } from '@renderer/shared/types'
 // Service stub for routine data (mocked).
 
 const mockRoutines: Routine[] = [
-  { id: 'r1', name: 'Morning reset', taskIds: ['t1'] },
+  { id: 'r1', name: 'Morning reset', taskIds: [1] },
   { id: 'r2', name: 'Evening wind-down', taskIds: [] }
 ]
 

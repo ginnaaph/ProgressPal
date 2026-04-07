@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from '@renderer/shared/test/renderWithProviders'
 import { TaskItem } from './TaskItem'
 
-const task = { id: 't1', title: 'Focus sprint', completed: false, kind: 'todo' } as const
+const task = { id: 1, title: 'Focus sprint', status: 'not-started', taskType: 'todo' } as const
 
 describe('TaskItem', () => {
   it('renders and toggles', async () => {
@@ -16,6 +16,6 @@ describe('TaskItem', () => {
     expect(screen.getByText('Focus sprint')).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: /complete\/toggle/i }))
-    expect(onToggle).toHaveBeenCalledWith('t1')
+    expect(onToggle).toHaveBeenCalledWith(1)
   })
 })

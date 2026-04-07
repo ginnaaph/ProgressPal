@@ -1,20 +1,34 @@
 import type { Task } from '@renderer/shared/types'
 
-// Service stub for task data (mocked).
-
 const mockTasks: Task[] = [
-  { id: 't1', title: 'Draft daily plan', completed: false, kind: 'todo' },
-  { id: 't2', title: 'Hydration check', completed: true, kind: 'habit' }
+  { id: 1, title: 'Draft daily plan', status: 'not-started', taskType: 'todo' },
+  {
+    id: 2,
+    title: 'Hydration check',
+    status: 'completed',
+    taskType: 'habit',
+    completedAt: new Date()
+  }
 ]
+
+let nextTaskId = 3
 
 export const tasksService = {
   list: async (): Promise<Task[]> => {
     return Promise.resolve(mockTasks)
   },
-  add: async (_draft: Omit<Task, 'id'>): Promise<Task> => {
-    return Promise.resolve({ id: 'new', title: 'New task', completed: false, kind: 'todo' })
+  add: async (draft: Omit<Task, 'id'>): Promise<Task> => {
+    const task: Task = { ...draft, id: nextTaskId++ }
+    mockTasks.push(task)
+    return Promise.resolve(task)
   },
-  toggle: async (_id: string): Promise<void> => {
+  toggle: async (id: number): Promise<void> => {
+    const task = mockTasks.find((entry) => entry.id === id)
+    if (task) {
+      const isCompleted = task.status === 'completed'
+      task.status = isCompleted ? 'not-started' : 'completed'
+      task.completedAt = isCompleted ? undefined : new Date()
+    }
     return Promise.resolve()
   }
 }
