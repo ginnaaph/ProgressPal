@@ -1,11 +1,12 @@
 import { create } from 'zustand'
 import type { Task } from '@renderer/shared/types'
+import { tasksService } from '../services/tasksService'
 
 export type TasksState = {
   tasks: Task[]
   setTasks: (tasks: Task[]) => void
   toggleTask: (id: number) => void
-  addTask: (draft: Omit<Task, 'id'>) => void
+  addTask: (draft: Omit<Task, 'id'>) => Promise<Task>
 }
 
 export const useTasksStore = create<TasksState>((set) => ({
@@ -26,9 +27,11 @@ export const useTasksStore = create<TasksState>((set) => ({
 
     // TODO: Earn coins when a task is completed.
   },
-  addTask: (draft) => {
+  addTask: async (draft) => {
+    const task = await tasksService.add(draft)
     set((state) => ({
-      tasks: [...state.tasks, { ...draft, id: state.tasks.length + 1 }]
+      tasks: [...state.tasks, task]
     }))
+    return task
   }
 }))

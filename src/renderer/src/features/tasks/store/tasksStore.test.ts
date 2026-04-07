@@ -6,14 +6,20 @@ describe('tasksStore', () => {
     useTasksStore.setState({ tasks: [] })
   })
 
-  it('adds a task with generated id', () => {
+  it('adds a task with generated id', async () => {
     const { addTask } = useTasksStore.getState()
 
-    addTask({ title: 'Focus sprint', status: 'not-started', taskType: 'todo' })
+    const createdTask = await addTask({
+      title: 'Focus sprint',
+      status: 'not-started',
+      taskType: 'todo'
+    })
 
     const tasks = useTasksStore.getState().tasks
     expect(tasks).toHaveLength(1)
-    expect(tasks[0]).toMatchObject({ id: 1, title: 'Focus sprint' })
+    expect(createdTask).toMatchObject({ title: 'Focus sprint', taskType: 'todo' })
+    expect(tasks[0]).toMatchObject({ title: 'Focus sprint', taskType: 'todo' })
+    expect(tasks[0].id).toEqual(expect.any(Number))
   })
 
   it('toggles completion', () => {

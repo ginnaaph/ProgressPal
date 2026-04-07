@@ -15,10 +15,9 @@ export const useTasks = () => {
     // TODO: Earn coins when a task is completed.
   }
 
-  const handleAdd = async (draft: { title: string; taskType: 'todo' | 'habit' }) => {
-    const newTask = { ...draft, status: 'not-started' as const }
-    addTask(newTask)
-    await tasksService.add(newTask)
+  const handleAdd = async (draft: Omit<Parameters<typeof addTask>[0], 'completedAt'>) => {
+    const newTask = { ...draft, completedAt: undefined }
+    await addTask(newTask)
   }
 
   return {
